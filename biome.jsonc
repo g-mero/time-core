@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/core", "ultracite/solid"],
+  "linter": {
+    "rules": {
+      "nursery": "off",
+      "performance": {
+        "noBarrelFile": "off"
+      }
+    }
+  }
+}

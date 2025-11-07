@@ -1,0 +1,58 @@
+{
+  "name": "timecore",
+  "version": "0.0.1",
+  "description": "timecore is a lightweight, fast, and modern date-time library for JavaScript and TypeScript, designed to simplify date and time manipulation with an intuitive API.",
+  "main": "./dist/index.mjs",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "vite -c ./playground/vite.config.ts",
+    "tc": "tsc --noEmit --skipLibCheck",
+    "test": "vitest run",
+    "test:tz1": "TZ=Pacific/Auckland vitest run",
+    "test:tz2": "TZ=Asia/Kathmandu vitest run",
+    "lint": "pnpm dlx ultracite@latest check",
+    "lint:error": "pnpm dlx ultracite@latest check --diagnostic-level error",
+    "lint:fix": "pnpm dlx ultracite@latest fix",
+    "bump": "bumpp --no-push",
+    "prepublish": "pnpm tc && pnpm build"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "date",
+    "time",
+    "datetime"
+  ],
+  "author": "g-mero",
+  "license": "MIT",
+  "packageManager": "pnpm@10.20.0",
+  "devDependencies": {
+    "@biomejs/biome": "2.3.4",
+    "@solidjs/router": "^0.15.3",
+    "@types/node": "^24.3.0",
+    "cross-env": "^10.1.0",
+    "bumpp": "^10.3.1",
+    "jige-core": "0.47.0",
+    "jige-ui": "^0.48.1",
+    "jsdom": "^27.1.0",
+    "dayjs": "1.11.19",
+    "@jige-ui/unocss": "^0.2.0",
+    "solid-js": "^1.9.10",
+    "tsdown": "^0.16.0",
+    "ultracite": "6.3.2",
+    "unocss": "^66.5.4",
+    "vite": "^7.2.1",
+    "vite-plugin-solid": "^2.11.10",
+    "vite-plugin-solid-pages": "^0.3.5",
+    "vitest": "^4.0.7"
+  },
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  }
+}
