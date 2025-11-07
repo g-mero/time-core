@@ -1,3 +1,3 @@
-# timecore
+# time-core
 
 work in progress...
