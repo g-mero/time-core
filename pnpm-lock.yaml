@@ -44,6 +44,9 @@ importers:
       tsdown:
         specifier: ^0.16.0
         version: 0.16.0(typescript@5.9.3)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
       ultracite:
         specifier: 6.3.2
         version: 6.3.2(typescript@5.9.3)

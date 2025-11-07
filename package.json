@@ -47,7 +47,8 @@
     "vite": "^7.2.1",
     "vite-plugin-solid": "^2.11.10",
     "vite-plugin-solid-pages": "^0.3.5",
-    "vitest": "^4.0.7"
+    "vitest": "^4.0.7",
+    "typescript": "^5.9.3"
   },
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
