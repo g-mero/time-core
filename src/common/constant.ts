@@ -1,4 +1,4 @@
-export const INVALID_DATA_STR = "Invalid Date";
+export const INVALID_DATE_STR = "Invalid Date";
 export const MS_IN_SECOND = 1000;
 export const MS_IN_MINUTE = MS_IN_SECOND * 60;
 export const MS_IN_HOUR = MS_IN_MINUTE * 60;

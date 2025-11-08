@@ -1,16 +1,18 @@
-import { INVALID_DATA_STR } from "~/common/constant";
-import { getTzOffsetString, isDateValid, pad } from "~/common/utils";
-import { type DateArgs, getDateValues, parseDate } from "~/parse";
+import { INVALID_DATE_STR } from "~/common/constant";
+import { getTzOffsetString, isDateArgsValid, pad } from "~/common/utils";
+import { getAllDateFields } from "~/getter/get-field";
+import { type DateArgs, parseDate } from "~/parse";
 
 function escapeForRegex(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 export function formatWithLayout(args: DateArgs, layout: string, utc = false) {
-  const date = parseDate(args);
-  if (!isDateValid(date)) {
-    return INVALID_DATA_STR;
+  if (!isDateArgsValid(args)) {
+    return INVALID_DATE_STR;
   }
+
+  const date = parseDate(args);
 
   const [
     year,
@@ -22,7 +24,7 @@ export function formatWithLayout(args: DateArgs, layout: string, utc = false) {
     seconds,
     milliseconds,
     timezoneOffset,
-  ] = getDateValues(date, utc);
+  ] = getAllDateFields(date, utc);
 
   const hours12 = hours24 % 12 || 12;
   const isAM = hours24 < 12;

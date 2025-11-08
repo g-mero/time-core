@@ -1,36 +1,34 @@
-import { INVALID_DATA_STR } from "~/common/constant";
-import { getTzOffsetString, isDateValid, pad } from "~/common/utils";
-import { type DateArgs, getDateValues, parseDate } from "~/parse";
+import { INVALID_DATE_STR } from "~/common/constant";
+import { getTzOffsetString, isDateArgsValid, pad } from "~/common/utils";
+import { getAllDateFields } from "~/getter";
+import type { DateArgs } from "~/parse";
 
-export function formatToDateTime(args?: DateArgs) {
-  const date = parseDate(args);
-  if (!isDateValid(date)) {
-    return INVALID_DATA_STR;
+export function formatToDateTime(args: DateArgs) {
+  if (!isDateArgsValid(args)) {
+    return INVALID_DATE_STR;
   }
-  const [year, month, day, _, hours, minutes, seconds] = getDateValues(
-    date,
+  const [year, month, day, _, hours, minutes, seconds] = getAllDateFields(
+    args,
     false
   );
   return `${year}-${pad(month)}-${pad(day)} ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 }
 
-export function formatToDateTimeMS(args?: DateArgs) {
-  const date = parseDate(args);
-  if (!isDateValid(date)) {
-    return INVALID_DATA_STR;
+export function formatToDateTimeMS(args: DateArgs) {
+  if (!isDateArgsValid(args)) {
+    return INVALID_DATE_STR;
   }
   const [year, month, day, _, hours, minutes, seconds, milliseconds] =
-    getDateValues(date, false);
+    getAllDateFields(args, false);
   return `${year}-${pad(month)}-${pad(day)} ${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(milliseconds, 3)}`;
 }
 
-export function formatToIso(args?: DateArgs) {
-  const date = parseDate(args);
-  if (!isDateValid(date)) {
-    return INVALID_DATA_STR;
+export function formatToIso(args: DateArgs) {
+  if (!isDateArgsValid(args)) {
+    return INVALID_DATE_STR;
   }
   const [year, month, day, _, hours, minutes, seconds, milliseconds, tzOffset] =
-    getDateValues(date, false);
+    getAllDateFields(args, false);
   return (
     `${year}-${pad(month)}-${pad(day)}T${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(milliseconds, 3)}` +
     `${getTzOffsetString(tzOffset)}`

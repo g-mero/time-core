@@ -8,19 +8,31 @@ export type DateArgs =
       tz?: "local" | "utc";
     };
 
-export function parseDate(args?: DateArgs): Date {
-  if (!args) {
-    return new Date();
-  }
+/**
+ * Parse various date arguments into a Date object
+ * @param args date arguments.
+ * @param clone default is true. whether to clone the Date object if a Date is passed
+ * @example
+ * ```ts
+ * parseDate(); // current date
+ * parseDate(new Date(2020, 0, 1)); // Date object
+ *
+ * parseDate([2025,6,1]); // 2025-06-01
+ *
+ * const date = new Date(2020, 0, 1);
+ * parseDate(date) !== date; // true
+ * parseDate(date, false) === date; // true
+ *
+ * parseDate("2020-01-01T00:00:00Z"); // ISO string
+ */
+export function parseDate(args?: DateArgs, clone = true): Date {
   if (args instanceof Date) {
     // clone date
-    return new Date(args.getTime());
-  }
-  if (typeof args === "string" || typeof args === "number") {
-    return new Date(args);
+    return clone ? new Date(args.getTime()) : args;
   }
   if (Array.isArray(args)) {
-    return new Date(...args);
+    const [year, month, day, hours = 0, min = 0, sec = 0, ms = 0] = args;
+    return new Date(year, month - 1, day, hours, min, sec, ms);
   }
   if (typeof args === "object" && "args" in args) {
     const opts = args;
@@ -29,34 +41,6 @@ export function parseDate(args?: DateArgs): Date {
     }
     return parseDate(opts.args);
   }
-  return new Date();
-}
 
-function callGetMethod(date: Date, method: string, utc: boolean) {
-  // @ts-expect-error dynamic method name
-  return date[`get${utc ? "UTC" : ""}${method}`]();
-}
-
-/**
- * get date values from Date object
- *
- * [year, month, day, weekday, hours, minutes, seconds, milliseconds, tzOffsetMinutes]
- *
- * Note: month is 0-based as in JavaScript Date
- */
-export function getDateValues(
-  date: Date,
-  utc: boolean
-): [number, number, number, number, number, number, number, number, number] {
-  return [
-    callGetMethod(date, "FullYear", utc),
-    callGetMethod(date, "Month", utc) + 1,
-    callGetMethod(date, "Date", utc),
-    callGetMethod(date, "Day", utc),
-    callGetMethod(date, "Hours", utc),
-    callGetMethod(date, "Minutes", utc),
-    callGetMethod(date, "Seconds", utc),
-    callGetMethod(date, "Milliseconds", utc),
-    utc ? 0 : -date.getTimezoneOffset(),
-  ];
+  return new Date(args as string | number);
 }

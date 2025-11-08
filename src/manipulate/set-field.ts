@@ -26,26 +26,37 @@ export function setWeekday(args: DateArgs, weekday: number) {
   return date;
 }
 
-export function setHours(args: DateArgs, hours: number) {
+export function setHours(
+  args: DateArgs,
+  hours: number,
+  min?: number,
+  sec?: number,
+  ms?: number
+) {
   const date = parseDate(args);
-  date.setHours(hours);
+  date.setHours(hours, min, sec, ms);
   return date;
 }
 
-export function setMinutes(args: DateArgs, minutes: number) {
+export function setMinutes(
+  args: DateArgs,
+  min: number,
+  sec?: number,
+  ms?: number
+) {
   const date = parseDate(args);
-  date.setMinutes(minutes);
+  date.setMinutes(min, sec, ms);
   return date;
 }
 
-export function setSeconds(args: DateArgs, seconds: number) {
+export function setSeconds(args: DateArgs, sec: number, ms?: number) {
   const date = parseDate(args);
-  date.setSeconds(seconds);
+  date.setSeconds(sec, ms);
   return date;
 }
 
-export function setMilliseconds(args: DateArgs, milliseconds: number) {
+export function setMilliseconds(args: DateArgs, ms: number) {
   const date = parseDate(args);
-  date.setMilliseconds(milliseconds);
+  date.setMilliseconds(ms);
   return date;
 }
