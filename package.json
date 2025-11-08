@@ -1,6 +1,6 @@
 {
   "name": "time-core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "time-core is a lightweight, fast, and modern date-time library for JavaScript and TypeScript, designed to simplify date and time manipulation with an intuitive API.",
   "main": "./dist/index.mjs",
   "files": [
